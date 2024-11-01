@@ -33,23 +33,34 @@ import axios from 'axios';
 })
 export class AppComponent implements OnInit{
   
-  ngOnInit() {
-  //   // Si no existe la cookie de CSRF, la obtenemos
-  //   if (!this.getCookie('XSRF-TOKEN')) {
-  //     axios.get('http://localhost:8000/sanctum/csrf-cookie',{
-  //       withCredentials: true
-  //     }).then(response => {
+   async ngOnInit() {
+    try {
+    // Si no existe la cookie de CSRF, la obtenemos
+    if (!this.getCookie('XSRF-TOKEN')) {
+      console.log('Cookie CSRF no encontrada, obteniendo...');
+      
+      await axios.get('http://localhost:8000/sanctum/csrf-cookie',
+        {
+         withCredentials: true // Sin esta opción, la cookie no se establecerá en el navegador, lo que provocará un error 419
+         //cabe destacar que todas las demas configuraciones de cors en el backend deben estar bien configuradas para que funcione correctamente
         
-  //       console.log('Cookie CSRF obtenida:', response);
-  //     }).catch(error => {
-  //       console.error('Error obteniendo la cookie CSRF:', error);
-  //     });
-  //   }
-  // }
-  // Función para obtener una cookie por su nombre
-  // getCookie(name: string): string | null {
-  //   const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-  //   if (match) return match[2];
-  //   return null;
-   }
+        })
+        .then(response => {
+          console.log('respuesta', response);
+        
+      }).catch(error => {
+        console.error('Error obteniendo la cookie CSRF:', error);
+      });
+    }
+  } catch (error) { 
+    console.error('Error en la petición de CSRF:', error);
+  }
+  }
+  // Función para obtener cookies
+  getCookie(name: string): string | null {
+    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (match) return match[2];
+    return null;
+    }
+   
 }

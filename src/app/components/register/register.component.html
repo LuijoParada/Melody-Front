@@ -40,11 +40,11 @@
 
                 <form>
                   <div class="relative w-full mb-3">
-                      <label for="name"  class="block uppercase text-gray-700 text-xs font-bold mb-2">Name</label>
+                      <label for="name"  class="block uppercase text-gray-700 text-xs font-bold mb-2">Nombre</label>
                       <input type="text" id="name" class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" [(ngModel)]="name" name="name">
                   </div>
                   <div class="relative w-full mb-3">
-                    <label for="email" class="block uppercase text-gray-700 text-xs font-bold mb-2">Email</label>
+                    <label for="email" class="block uppercase text-gray-700 text-xs font-bold mb-2">Correo</label>
                     <input type="text" id="email" class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" [(ngModel)]="email" name="email">
                   </div>
                   <div class="relative w-full mb-3">
@@ -52,7 +52,7 @@
                     <input type="password" id="password" class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" [(ngModel)]="password" name="password">
                   </div>
                   <div class="relative w-full mb-3">
-                    <label for="passwordConfirmation" class="block uppercase text-gray-700 text-xs font-bold mb-2">Confirm Password</label>
+                    <label for="passwordConfirmation" class="block uppercase text-gray-700 text-xs font-bold mb-2">Confirmar Contraseña</label>
                     <input type="text" id="passwordConfirmation" class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" [(ngModel)]="passwordConfirmation" name="passwordConfirmation">
                   </div>
                   <div class="text-center mt-6">                   
@@ -66,12 +66,12 @@
 
             <div class="flex flex-wrap mt-6">
               <div class="w-1/2">
-                <a href="#pablo" class="text-gray-300"
+                <a routerLink="/login" class="text-gray-300"
                   ><small>Ya tienes una cuenta?</small>
                 </a>
               </div>
               <div class="w-1/2 text-right">
-                <a href="#pablo" class="text-gray-300"
+                <a routerLink="/xd" class="text-gray-300"
                   ><small>Olvidaste tu contraseña?</small>
                 </a>
               </div>

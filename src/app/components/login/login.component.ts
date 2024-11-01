@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-import { HttpClient } from '@angular/common/http';
+import axios from 'axios';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,23 +13,28 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   email: string = "";
   password: string = "";
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor( private router: Router) { }
 
   onSubmit() {
-    const formData = new FormData();
-    
-    formData.append('email', this.email);
-    formData.append('password', this.password);
 
-    this.http.post(`http://localhost:8000/api/auth/login`, formData)
-      .subscribe(
-        response => console.log(response),
-
-        error => console.log(error)
-      );
-    // If login successful, navigate to dashboard page
-    this.router.navigate(['']);
-
+    // If login successful, navigate to dashboard create the cookie with the info of the user an his privileges that comes in the response of the laravel sanctum auth
+    // are going to be used in the dashboard to show or hide some components depending on the user's privileges
+    axios.post('http://localhost:8000/api/auth/login', {  
+      email: this.email,
+      password: this.password
+    }, {
+      withCredentials: true,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    }).then(response => {
+      // Create the cookie with the user info and privileges
+      document.cookie = "user=" + JSON.stringify(response.data);
+      console.log('Login exitoso:', response);
+      this.router.navigate(['/profile']);
+    }).catch(error => {
+      console.error('Error en el login:', error);
+    });
   }
-
 }
