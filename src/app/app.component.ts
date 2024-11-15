@@ -10,6 +10,8 @@ import { MusictopartitureComponent } from './components/musictopartiture/musicto
 import { LearnpathComponent } from './components/learnpath/learnpath.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { ChallengesComponent } from './components/challenges/challenges.component';
+import { EjerciciosTonalesComponent } from './components/ejercicios-tonales/ejercicios-tonales.component';
+import { EjercicioComponent } from './components/ejercicio/ejercicio.component';
 import axios from 'axios';
 
 @Component({
@@ -18,7 +20,7 @@ import axios from 'axios';
   imports: [
     RouterOutlet,
     ChallengesComponent,
-    FooterComponent, 
+    FooterComponent,
     HeaderComponent,
     HomepageComponent,
     LoginComponent,
@@ -27,32 +29,34 @@ import axios from 'axios';
     MusictopartitureComponent,
     LearnpathComponent,
     NotfoundComponent,
+    EjercicioComponent,
+    EjerciciosTonalesComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: '../output.css'
 })
 export class AppComponent implements OnInit{
-  
+
    async ngOnInit() {
     try {
     // Si no existe la cookie de CSRF, la obtenemos
     if (!this.getCookie('XSRF-TOKEN')) {
       console.log('Cookie CSRF no encontrada, obteniendo...');
-      
+
       await axios.get('http://localhost:8000/sanctum/csrf-cookie',
         {
          withCredentials: true // Sin esta opción, la cookie no se establecerá en el navegador, lo que provocará un error 419
          //cabe destacar que todas las demas configuraciones de cors en el backend deben estar bien configuradas para que funcione correctamente
-        
+
         })
         .then(response => {
           console.log('respuesta', response);
-        
+
       }).catch(error => {
         console.error('Error obteniendo la cookie CSRF:', error);
       });
     }
-  } catch (error) { 
+  } catch (error) {
     console.error('Error en la petición de CSRF:', error);
   }
   }
@@ -62,5 +66,5 @@ export class AppComponent implements OnInit{
     if (match) return match[2];
     return null;
     }
-   
+
 }
