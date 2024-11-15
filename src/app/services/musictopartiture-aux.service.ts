@@ -24,5 +24,10 @@ export class MusictopartitureAuxService {
     // Añadir el componente al DOM en la posición deseada
     element.appendChild((componentRef.hostView as any).rootNodes[0]);
   }
+  deleteAlert(element: HTMLElement) {
+    // Eliminar el componente del DOM
+    
+    element.removeChild(element.childNodes[0]);
+  }
 
 }

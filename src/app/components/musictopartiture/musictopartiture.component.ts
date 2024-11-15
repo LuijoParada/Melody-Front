@@ -1,10 +1,12 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import axios from 'axios';
 import { AlertComponent } from '../../misc/alert/alert.component';
 import { CommonModule } from '@angular/common';
 import { MusictopartitureAuxService } from '../../services/musictopartiture-aux.service'; 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Modal } from 'flowbite';
+import type { ModalOptions, ModalInterface } from 'flowbite';
 
 @Component({
   selector: 'app-musictopartiture',
@@ -13,105 +15,122 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   templateUrl: './musictopartiture.component.html',
   styleUrls: ['./musictopartiture.component.css']
 })
-export class MusictopartitureComponent {
+export class MusictopartitureComponent implements AfterViewInit {
 
   @ViewChild('alertBottom', { static: true }) alertBottom!: ElementRef;
-  isSent: boolean = false;
-  isActive: boolean = true;
+  @ViewChild('modalElement', { static: true }) modalElementRef!: ElementRef; // modalElementRef es el nombre de la variable que se le asigna al elemento modalElement
+  
+  isSent = false;
+  isActive = true;
   fileName: string | null = null;
   file: File | null = null;
-  disableButton = false; //cambiar el componente html para que funcione, es decir, agregar el [disabled]="disableButton" en el boton de enviar
-  pdfUrl: SafeResourceUrl | null = null; // Tipo SafeResourceUrl para URLs seguras
-  isLoading = false; // Variable de estado de carga
+  disableButton = false;
+  pdfUrl: SafeResourceUrl | null = null;
+  isLoading = false;
+  modal!: ModalInterface; //modal
 
   constructor(private musictopartitureAuxService: MusictopartitureAuxService, private sanitizer: DomSanitizer) {}
-  
-    // Método para manejar el evento 'dragover' y prevenir el comportamiento predeterminado
-    onDragOver(event: DragEvent) {
-      event.preventDefault();
-    }
-  
-    // Método para manejar el evento 'drop' y extraer el archivo
-    onFileDrop(event: DragEvent) {
-      event.preventDefault();
-      if (event.dataTransfer?.files.length) {
-        // Extraer el archivo del evento y guardarlo en la variable 'file'
-        const file = event.dataTransfer.files[0];
-        this.handleFile(file);
-      }
-    }
-  
-    // Método para manejar el cambio en el input file
-    onFileChange(event: Event) {
-      const target = event.target as HTMLInputElement;
-      if (target.files && target.files.length > 0) { // Verificar si hay archivos seleccionados
-        const file = target.files[0];
-        this.handleFile(file);
-      }
-    }
-  
-    // Método para manejar el archivo seleccionado
-    handleFile(file: File) {
-      console.log('Archivo cargado:', file);
-      this.file = file;
-      this.fileName = file.name;
-      console.log('Nombre del archivo:', file.name);
-      this.isActive = false;
-      // Aquí puedes agregar la lógica adicional para manejar el archivo cargado.
-    }
 
-    mostrarAlerta(posicion: ElementRef) {
-      this.musictopartitureAuxService.showAlertAt(posicion.nativeElement);
+  ngAfterViewInit() {
+    // Configuración del modal
+    const modalOptions: ModalOptions = {
+      placement: 'bottom-right',
+      backdrop: 'dynamic',
+      backdropClasses: 'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40',
+      closable: true,
+      onHide: () => console.log('modal is hidden'),
+      onShow: () => console.log('modal is shown'),
+      onToggle: () => console.log('modal has been toggled'),
+    };
+    this.modal = new Modal(this.modalElementRef.nativeElement, modalOptions);
+    }
+    openModal() {
+      this.modal.show();
+    }
+    closeModal() {
+      this.modal.hide();
     }
 
 
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+  onFileDrop(event: DragEvent) {
+    event.preventDefault();
+    if (event.dataTransfer?.files.length) {
+      const file = event.dataTransfer.files[0];
+      this.handleFile(file);
+    }
+  }
+  onFileChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (target.files && target.files.length > 0) {
+      const file = target.files[0];
+      this.handleFile(file);
+    }
+  }
+
+  handleFile(file: File) {
+    console.log('Archivo cargado:', file);
+    this.file = file;
+    this.fileName = file.name;
+    console.log('Nombre del archivo:', file.name);
+    this.isActive = false;
+  }
+
+  mostrarAlerta(posicion: ElementRef) {
+    this.musictopartitureAuxService.showAlertAt(posicion.nativeElement);
+  }
+  eliminarAlerta(posicion: ElementRef) {
+    this.musictopartitureAuxService.deleteAlert(posicion.nativeElement);
+  } 
   disableButtonFunction() {
     this.disableButton = true;
-
   }
-  //fileDrop
-  fileDrop(){
+  fileDrop() { //funcion que quita el archivo seleccionado
+
+    this.file = null;
+    this.isLoading = !this.isLoading;
     this.isActive = !this.isActive;
-    this.isSent =  !this.isSent;
+    
+    if(this.isSent === true) {
+      this.isSent = !this.isSent;
+      
+      this.eliminarAlerta(this.alertBottom);
+      this.disableButton = !this.disableButton;
+    }
   }
 
-  // Enviar el archivo al servidor
   async onSubmit(event: Event) {
+    event.preventDefault();
+    if (!this.file) {
+      return this.modal.show();
+    }
 
     this.isSent = true;
     this.mostrarAlerta(this.alertBottom);
+    this.isLoading = true;
 
-    event.preventDefault();
-    if (!this.file) {
-
-      return alert('Por favor, seleccione un archivo');
-    }
     try {
-      // Crear un FormData y agregar el archivo
       const formData = new FormData();
       formData.append('audiofile', this.file);
-      this.isLoading = true;
       console.log('Archivo enviado');
-      // Realizar la solicitud POST a la API
-      await axios.post('http://localhost:8000/api/audio/convert', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        withCredentials: true,
-      },
-    ).then((response) => {
-        //el servidor responde con el archivo que enviara como return response()->file(storage_path("app/temp/output/{$midiName}"));
-        console.log('Respuesta del servidor:', response.data);
-        // Obtener la URL del archivo PDF
-        const pdfPath = response.data.pdfurl;
-        this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(pdfPath); // Marca la URL como segura
-        console.log('URL del archivo:', pdfPath);
-        this.isLoading = false;
 
+      const response = await axios.post('http://localhost:8000/api/audio/convert', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        withCredentials: true,
       });
+
+      console.log('Respuesta del servidor:', response.data);
+      const pdfPath = response.data.pdfurl;
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(pdfPath);
+      console.log('URL del archivo:', pdfPath);
     } catch (error) {
       console.error('Error durante el envío del archivo', error);
+    } finally {
+      this.isLoading = false;
     }
-
   }
+
+
 }
