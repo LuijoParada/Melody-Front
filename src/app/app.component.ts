@@ -1,4 +1,4 @@
-import { Component, importProvidersFrom, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -49,10 +49,10 @@ const initBodyOverlayScrollbars = (force?: boolean) =>
     LearnpathComponent,
     NotfoundComponent,
     EjercicioComponent,
-    EjerciciosTonalesComponent,
-    ],
+    EjerciciosTonalesComponent
+  ],
   templateUrl: './app.component.html',
-  styleUrl: '../output.css'
+  styleUrls: ['../output.css']
 })
 export class AppComponent implements OnInit{
 
@@ -88,6 +88,7 @@ export class AppComponent implements OnInit{
   this.authService.restoreAuthState();
   
   }
+
   // Función para obtener cookies
   getCookie(name: string): string | null {
     const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));

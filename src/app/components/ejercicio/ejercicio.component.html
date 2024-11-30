@@ -1,15 +1,25 @@
-<div class="ejercicio" style="width: 70%; margin: 0 auto;">
-  <h1 style="text-align: left;">Nivel {{ nivel }}</h1>
-  <p style="text-align: center;">
-    Elige la partitura correcta para la siguiente sucesión de notas:
-  </p>
-  <h2 style="text-align: center; font-size: 28px; margin: 20px 0;">
-    Do Re Mi Fa Sol La Si Do
-  </h2>
-  <div class="opciones" style="text-align: center;">
-    <img src="/N1E1.1.png" alt="Opción 1" style="width: 100%; max-width: 600px; margin: 10px 0;">
-    <img src="/N1E1.2.png" alt="Opción 2" style="width: 100%; max-width: 600px; margin: 10px 0;">
-    <img src="/N1E1.3.png" alt="Opción 3" style="width: 100%; max-width: 600px; margin: 10px 0;">
-    <img src="/N1E1.4.png" alt="Opción 4" style="width: 100%; max-width: 600px; margin: 10px 0;">
+<section class="text-gray-600 body-font bg-slate-400 w-full">
+  <div class="container px-5 py-12 mx-auto" style="max-width: 70%;">
+    <div class="header mb-4 p-4 bg-gray-100 rounded-lg flex justify-between items-center">
+      <h1 style="text-align: left;">Nivel {{ nivel }}</h1>
+      <span style="text-align: right;">{{ ejercicioActual }}/{{ totalEjercicios }}</span>
+    </div>
+    <div class="ejercicio bg-gray-100 p-4 rounded-lg">
+      <p style="text-align: center; font-size: 28px;" *ngIf="pregunta">
+        {{ pregunta }}
+      </p>
+      <p style="text-align: center; font-size: 18px;">Haz clic en una imagen para seleccionar una opción</p>
+      <div class="opciones" style="text-align: center;">
+        <div *ngFor="let opcion of opciones" class="opcion" (click)="seleccionarOpcion(opcion)" [ngClass]="{ 'opcion-correcta': opcion.imagen === respuestaCorrecta && mostrarBoton, 'opcion-incorrecta': opcion.imagen !== respuestaCorrecta && mostrarBoton }">
+          <img [src]="opcion.imagen" alt="Opción" [style.pointer-events]="mostrarBoton ? 'none' : 'auto'" style="width: 100%; max-width: 600px; margin: 10px 0;">
+        </div>
+      </div>
+      <p *ngIf="mensajeAlerta" [ngClass]="mensajeAlerta === '¡Correcto!' ? 'mensaje-correcto' : 'mensaje-incorrecto'">
+        {{ mensajeAlerta }}
+      </p>
+      <button *ngIf="mostrarBoton" style="margin-top: 20px; background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;" (click)="avanzarPregunta()">Avanzar</button>
+    </div>
   </div>
-</div>
+</section>
+
+
