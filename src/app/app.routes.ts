@@ -9,6 +9,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EjerciciosTonalesComponent } from './components/ejercicios-tonales/ejercicios-tonales.component';
 import { EjercicioComponent } from './components/ejercicio/ejercicio.component';
+import { authGuard } from './guard/auth.guard';
 
 
 export const routes: Routes = [
@@ -18,7 +19,8 @@ export const routes: Routes = [
     {path: 'challenges', component: ChallengesComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
-    {path: 'profile', component: ProfileComponent },
+    //esta ruta estara protegida por el guard
+    {path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
     {path: 'tonales', component: EjerciciosTonalesComponent},
     {path: 'ejercicio/:nivel', component: EjercicioComponent},
     {path: '**', component: NotfoundComponent}

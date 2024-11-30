@@ -36,8 +36,8 @@
                   </div>
                 </div>
  
-                <label for="dropzone-file" [ngClass]="isActive ? 'active' : 'hidden'" class="file-container flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-slate-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                  (dragover)="onDragOver($event)" 
+                <label for="dropzone-file" [ngClass]="isActive ? 'active' : 'hidden'" class="file-container flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  dark:bg-slate-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                  (dragover)="onDragOver($event)" dark:hover:bg-gray-800
                   (drop)="onFileDrop($event)">
                   
                   <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -72,17 +72,20 @@
               <h3 class="text-gray-900 text-center title-font text-lg font-medium">Convirtiendo...</h3>
             </div>
           
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only">Loading</span>
           </div>
           <!--el embed debe adaptarse al tamaño del contenedor *ngIf="pdfUrl" "pdfUrl"-->
-          <embed *ngIf="pdfUrl" [src]="pdfUrl" class="w-full h-[500px] min-w-[450px] p-6" type="application/pdf">
-
-
+          <div *ngIf="pdfUrl" class="p-6">
+            <!-- Botón para guardar -->
+            <div class="flex items-center justify-center mb-2 space-x-4">
+              <audio *ngIf="audiofileURL" [src]="audiofileURL" controls class="flex-grow w-80 lg:w-96 h-12 bg-gray-200 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring focus:ring-blue-400"></audio>
+              <button class="inline-flex items-center justify-center h-12 px-6 bg-gray-100 border border-gray-300 text-gray-800 hover:bg-gray-200 rounded-lg text-base font-medium focus:outline-none focus:ring focus:ring-blue-400">Guardar</button>
+            </div>
+            <embed [src]="pdfUrl" class="w-full h-[500px] min-w-[450px] rounded-xl" type="application/pdf" />
+          </div>
         </div>
       </div>
-
     </div>
-
   </div>
 
   <!--esto se puede convertir en un componente pero por ahora lo dejo asi-->

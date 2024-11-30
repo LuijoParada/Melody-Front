@@ -19,7 +19,8 @@ export class MusictopartitureComponent implements AfterViewInit {
 
   @ViewChild('alertBottom', { static: true }) alertBottom!: ElementRef;
   @ViewChild('modalElement', { static: true }) modalElementRef!: ElementRef; // modalElementRef es el nombre de la variable que se le asigna al elemento modalElement
-  
+  @ViewChild('audioPlayer', { static: true }) audioPlayerRef!: ElementRef;
+
   isSent = false; //ebe ser false
   isActive = true;
   fileName: string | null = null;
@@ -28,6 +29,7 @@ export class MusictopartitureComponent implements AfterViewInit {
   pdfUrl: SafeResourceUrl | null = null;
   isLoading = false; //debe ser false
   modal!: ModalInterface; //modal
+  audiofileURL: string | null = null;
 
   constructor(private musictopartitureAuxService: MusictopartitureAuxService, private sanitizer: DomSanitizer) {}
 
@@ -66,6 +68,7 @@ export class MusictopartitureComponent implements AfterViewInit {
       const target = event.target as HTMLInputElement;
       if (target.files && target.files.length > 0) {
         const file = target.files[0];
+        this.audiofileURL = URL.createObjectURL(file);
         this.handleFile(file);
       }
     }
@@ -120,11 +123,10 @@ export class MusictopartitureComponent implements AfterViewInit {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
-
-      console.log('Respuesta del servidor:', response.data);
-      const pdfPath = response.data.pdfurl;
-      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(pdfPath);
-      console.log('URL del archivo:', pdfPath);
+        //console.log('Respuesta del servidor:', response.data);
+        const pdfPath = response.data.pdfurl;
+        this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(pdfPath);
+        //console.log('URL del archivo:', pdfPath);
     } catch (error) {
       console.error('Error durante el envío del archivo', error);
     } finally {
