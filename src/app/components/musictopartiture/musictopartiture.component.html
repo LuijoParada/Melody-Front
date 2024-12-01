@@ -10,7 +10,7 @@
       <div [ngClass]=" isSent ? 'xl:w-1/3' : 'xl:w-3/4'" class="w-full lg:w-1/2 p-2 min-w-[536px]">
 
         <form (ngSubmit)="onSubmit($event)">
-          <div class="bg-slate-100  p-4 rounded-lg">
+          <div class="bg-slate-300  p-4 rounded-lg">
 
  
 
@@ -18,7 +18,7 @@
               <div class="flex items-center justify-center w-full mb-4">
 
 
-                <div [ngClass]="isActive ? 'hidden' : 'active'" class="relative flex flex-wrap m-4 border border-gray-300 rounded-lg p-4 bg-transparent">
+                <div [ngClass]="isActive ? 'hidden' : 'active'" class="relative flex flex-wrap m-4 border border-gray-400 rounded-lg p-4 bg-transparent">
                   <button (click)="fileDrop()" type="button" class="absolute top-2 right-2 bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                     <span class="sr-only">Borrar archivo</span>
                     <!-- Icono de cerrar -->
@@ -36,7 +36,7 @@
                   </div>
                 </div>
  
-                <label for="dropzone-file" [ngClass]="isActive ? 'active' : 'hidden'" class="file-container flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  dark:bg-slate-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                <label for="dropzone-file" [ngClass]="isActive ? 'active' : 'hidden'" class="file-container flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  dark:bg-[#0f172a] hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-[#1d2b4d]"
                   (dragover)="onDragOver($event)" dark:hover:bg-gray-800
                   (drop)="onFileDrop($event)">
                   
@@ -45,7 +45,7 @@
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                     </svg>
                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center"><span class="font-semibold">Click para subir el archivo</span> <br>o arrastre su archivo hasta aqui</p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">MP3, WAV or OGG (MAX. 30s)</p>
+                    <p class="text-xs text-center text-gray-500 dark:text-gray-400">MP3, WAV or OGG <br>(Maximo 30s)</p>
                   </div>
               
                   <input #fileInput id="dropzone-file" type="file" class="hidden" (change)="onFileChange($event)" accept=".mp3, .wav" />

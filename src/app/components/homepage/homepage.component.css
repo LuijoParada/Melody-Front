@@ -1,0 +1,30 @@
+/* Contenedor del carrusel */
+.carousel-wrapper {
+    display: flex;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+    
+    position: relative;
+  }
+  
+  /* Elementos individuales del carrusel */
+  .carousel-item {
+    flex: 0 0 100%; /* Cada imagen ocupa el 100% del ancho */
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Imagen del carrusel */
+  .carousel-image {
+    max-width: 90%; /* Limita el ancho máximo */
+    max-height: 400px; /* Limita la altura */
+    object-fit: contain; /* Mantiene proporciones */
+  }
+  
+  /* Ajuste responsivo */
+  @media (max-width: 640px) {
+    .carousel-image {
+      max-width: 100%;
+      max-height: 300px;
+    }
+  }
