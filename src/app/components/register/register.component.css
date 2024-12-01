@@ -1,0 +1,7 @@
+.musical-notes-background {
+  background-color: #1a202c; /* Color de fondo oscuro */
+  /* background-image: url('note1.png'), url('note2.png'), url('note3.png'); */
+  background-size: 100px, 120px, 140px; /* Tamaño de las notas */
+  background-position: 10% 20%, 50% 50%, 90% 80%; /* Posición de las notas */
+  background-repeat: no-repeat, no-repeat, no-repeat;
+}
