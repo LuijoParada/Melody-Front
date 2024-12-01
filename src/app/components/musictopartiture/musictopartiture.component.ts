@@ -19,15 +19,17 @@ export class MusictopartitureComponent implements AfterViewInit {
 
   @ViewChild('alertBottom', { static: true }) alertBottom!: ElementRef;
   @ViewChild('modalElement', { static: true }) modalElementRef!: ElementRef; // modalElementRef es el nombre de la variable que se le asigna al elemento modalElement
-  
-  isSent = false;
+  @ViewChild('audioPlayer', { static: true }) audioPlayerRef!: ElementRef;
+
+  isSent = false; //ebe ser false
   isActive = true;
   fileName: string | null = null;
   file: File | null = null;
   disableButton = false;
   pdfUrl: SafeResourceUrl | null = null;
-  isLoading = false;
+  isLoading = false; //debe ser false
   modal!: ModalInterface; //modal
+  audiofileURL: string | null = null;
 
   constructor(private musictopartitureAuxService: MusictopartitureAuxService, private sanitizer: DomSanitizer) {}
 
@@ -51,55 +53,56 @@ export class MusictopartitureComponent implements AfterViewInit {
       this.modal.hide();
     }
 
-
-  onDragOver(event: DragEvent) {
-    event.preventDefault();
-  }
-  onFileDrop(event: DragEvent) {
-    event.preventDefault();
-    if (event.dataTransfer?.files.length) {
-      const file = event.dataTransfer.files[0];
-      this.handleFile(file);
+    onDragOver(event: DragEvent) {
+      event.preventDefault();
     }
-  }
-  onFileChange(event: Event) {
-    const target = event.target as HTMLInputElement;
-    if (target.files && target.files.length > 0) {
-      const file = target.files[0];
-      this.handleFile(file);
+
+    onFileDrop(event: DragEvent) {
+      event.preventDefault();
+      if (event.dataTransfer?.files.length) {
+        const file = event.dataTransfer.files[0];
+        this.handleFile(file);
+      }
     }
-  }
+    onFileChange(event: Event) {
+      const target = event.target as HTMLInputElement;
+      if (target.files && target.files.length > 0) {
+        const file = target.files[0];
+        this.audiofileURL = URL.createObjectURL(file);
+        this.handleFile(file);
+      }
+    }
 
-  handleFile(file: File) {
-    console.log('Archivo cargado:', file);
-    this.file = file;
-    this.fileName = file.name;
-    console.log('Nombre del archivo:', file.name);
-    this.isActive = false;
-  }
+    handleFile(file: File) {
+      console.log('Archivo cargado:', file);
+      this.file = file;
+      this.fileName = file.name;
+      console.log('Nombre del archivo:', file.name);
+      this.isActive = false;
+    }
 
-  mostrarAlerta(posicion: ElementRef) {
-    this.musictopartitureAuxService.showAlertAt(posicion.nativeElement);
-  }
-  eliminarAlerta(posicion: ElementRef) {
-    this.musictopartitureAuxService.deleteAlert(posicion.nativeElement);
-  } 
-  disableButtonFunction() {
-    this.disableButton = true;
-  }
-  fileDrop() { //funcion que quita el archivo seleccionado
+    mostrarAlerta(posicion: ElementRef) {
+      this.musictopartitureAuxService.showAlertAt(posicion.nativeElement);
+    }
+    eliminarAlerta(posicion: ElementRef) {
+      this.musictopartitureAuxService.deleteAlert(posicion.nativeElement);
+    } 
+    disableButtonFunction() {
+      this.disableButton = true;
+    }
+    fileDrop() { //funcion que quita el archivo seleccionado
 
-    this.file = null;
-    this.isLoading = !this.isLoading;
-    this.isActive = !this.isActive;
-    
-    if(this.isSent === true) {
-      this.isSent = !this.isSent;
+      this.file = null;
+      this.isLoading = !this.isLoading;
+      this.isActive = !this.isActive;
       
-      this.eliminarAlerta(this.alertBottom);
-      this.disableButton = !this.disableButton;
+      if(this.isSent === true) {
+        this.isSent = !this.isSent;
+        
+        this.eliminarAlerta(this.alertBottom);
+        this.disableButton = !this.disableButton;
+      }
     }
-  }
 
   async onSubmit(event: Event) {
     event.preventDefault();
@@ -120,11 +123,10 @@ export class MusictopartitureComponent implements AfterViewInit {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
-
-      console.log('Respuesta del servidor:', response.data);
-      const pdfPath = response.data.pdfurl;
-      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(pdfPath);
-      console.log('URL del archivo:', pdfPath);
+        //console.log('Respuesta del servidor:', response.data);
+        const pdfPath = response.data.pdfurl;
+        this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(pdfPath);
+        //console.log('URL del archivo:', pdfPath);
     } catch (error) {
       console.error('Error durante el envío del archivo', error);
     } finally {
