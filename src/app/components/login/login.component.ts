@@ -19,12 +19,13 @@ export class LoginComponent {
   async onSubmit() {
     
     try {
-      const response = await this.auth.login(this.email, this.password).then(response => {
+      await this.auth.login(this.email, this.password)
+      // .then(response => {
         // Create the cookie with the user info and privileges
         //document.cookie = "user=" + JSON.stringify(response.data);
-        console.log('Login exitoso:', response);
-        this.router.navigate(['/profile']);
-      })
+        console.log('Login exitoso:', this.auth.getUser());   
+        //this.router.navigate(['/profile']);
+      // })
 
     } catch (response) {
       if (axios.isAxiosError(response)) {

@@ -11,17 +11,13 @@
     private user: any = null; // Información del usuario
 
     constructor(private router: Router) {
-      // Al inicializar el servicio, comprueba si hay sesión activa
-      this.restoreAuthState();
+
     }
     // Verifica si el usuario está autenticado
-    
     isLoggedIn(): boolean {
       return this.isAuthenticated;
     }
-
     // Devuelve la información del usuario loggeado
-    
     getUser(): any {
       return this.user;
     }
@@ -33,9 +29,7 @@
      */
     async login(email: string, password: string): Promise<void> {
       try {
-        const response = await axios.post(
-          `${this.apiUrl}/auth/login`,
-          { email, password },
+        const response = await axios.post(`${this.apiUrl}/auth/login`,{ email, password },
           {
             withCredentials: true, // Incluye las cookies para Sanctum
             headers: {
@@ -47,11 +41,11 @@
         // Actualiza el estado de autenticación
         this.isAuthenticated = true;
         this.user = response.data.user; // Guarda la información del usuario
-
         // Guarda el estado en localStorage
         this.saveAuthState();
 
         console.log('Login exitoso:', this.user);
+        this.router.navigate(['/profile']);
       } catch (error) {
         if (axios.isAxiosError(error)) {
           console.error('Error en el login:', error.response?.data || error.message);
@@ -96,7 +90,9 @@
     //Guarda el estado de autenticación en localStorage
     private saveAuthState(): void {
       // Guardar solo si `user` no es nulo
+      console.log('saveauthstate veamos si podemos autenticarnos');
       if (this.isAuthenticated && this.user) {
+        console.log('Guardando estado de autenticación');
         localStorage.setItem('isAuthenticated', 'true');
         localStorage.setItem('user', JSON.stringify(this.user));
       } else {
@@ -105,6 +101,7 @@
     }
     //Limpia el estado de autenticación en localStorage
     private clearAuthState(): void {
+      console.log('Limpiando estado de autenticación');
       localStorage.removeItem('isAuthenticated');
       localStorage.removeItem('user');
     }

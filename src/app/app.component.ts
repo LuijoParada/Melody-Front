@@ -13,25 +13,7 @@ import { ChallengesComponent } from './components/challenges/challenges.componen
 import { EjerciciosTonalesComponent } from './components/ejercicios-tonales/ejercicios-tonales.component';
 import { EjercicioComponent } from './components/ejercicio/ejercicio.component';
 import { AuthService } from './services/auth.service'
-import 'overlayscrollbars/overlayscrollbars.css';
-import { OverlayScrollbars, ScrollbarsHidingPlugin, SizeObserverPlugin, ClickScrollPlugin} from 'overlayscrollbars';
 import axios from 'axios';
-
-const initBodyOverlayScrollbars = (force?: boolean) =>
-  OverlayScrollbars(
-    {
-      target: document.body,
-      cancel: {
-        body: force ? false : null,
-      },
-    },
-    {
-      scrollbars: {
-        theme: 'os-theme-dark',
-        clickScroll: true,
-      },
-    }
-  )
 
 @Component({
   selector: 'app-root',
@@ -49,20 +31,18 @@ const initBodyOverlayScrollbars = (force?: boolean) =>
     LearnpathComponent,
     NotfoundComponent,
     EjercicioComponent,
-    EjerciciosTonalesComponent
+    EjerciciosTonalesComponent,
+    
   ],
   templateUrl: './app.component.html',
   styleUrls: ['../output.css']
 })
+
 export class AppComponent implements OnInit{
-
-  constructor(private authService: AuthService) {}
-  
- 
-
+  constructor(private authService: AuthService) {
+}
   async ngOnInit() {
-    initBodyOverlayScrollbars()
-
+    this.authService.restoreAuthState();
     try {
     // Si no existe la cookie de CSRF, la obtenemos
     if (!this.getCookie('XSRF-TOKEN')) {
@@ -85,7 +65,7 @@ export class AppComponent implements OnInit{
     console.error('Error en la petición de CSRF:', error);
   }
 
-  this.authService.restoreAuthState();
+
   
   }
 
