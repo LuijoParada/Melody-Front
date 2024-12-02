@@ -10,7 +10,8 @@ export class EjercicioService {
 
   constructor(private http: HttpClient) {}
 
-  obtenerEjercicio(nivel: number, ejercicio: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/ejercicio/${nivel}/${ejercicio}`);
+  obtenerEjercicios(tipo: string, nivel: number): Observable<any[]> {
+    const url = `${this.apiUrl}/ejercicio/${tipo}/${nivel}`;
+    return this.http.get<any[]>(url);
   }
 }

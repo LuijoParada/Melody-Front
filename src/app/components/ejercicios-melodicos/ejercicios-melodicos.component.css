@@ -1,0 +1,39 @@
+.ejercicios-melodicos {
+  padding: 20px;
+  background-color: #E2E8F0;
+  text-align: center;
+}
+
+.ejercicios-melodicos h1 {
+  color: #333;
+  font-size: 36px;
+  margin-right: 20px;
+}
+
+.ejercicios-melodicos p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.ejercicios-melodicos ul {
+  list-style-type: none;
+  padding: 0;
+  display: inline-block;
+  text-align: left;
+  width: 70%;
+}
+
+.ejercicios-melodicos ul li {
+  margin: 5px 0;
+  padding: 10px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ejercicios-melodicos ul li:hover {
+  background-color: #d0d0d0;
+}

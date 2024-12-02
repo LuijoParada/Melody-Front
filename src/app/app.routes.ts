@@ -8,6 +8,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EjerciciosTonalesComponent } from './components/ejercicios-tonales/ejercicios-tonales.component';
+import { EjerciciosRitmicosComponent } from './components/ejercicios-ritmicos/ejercicios-ritmicos.component';
+import { EjerciciosMelodicosComponent } from './components/ejercicios-melodicos/ejercicios-melodicos.component';
 import { EjercicioComponent } from './components/ejercicio/ejercicio.component';
 import { authGuard } from './guard/auth.guard';
 
@@ -22,7 +24,9 @@ export const routes: Routes = [
     //esta ruta estara protegida por el guard
     {path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
     {path: 'tonales', component: EjerciciosTonalesComponent},
-    {path: 'ejercicio/:nivel', component: EjercicioComponent},
+    { path: 'ritmicos', component: EjerciciosRitmicosComponent },
+    { path: 'melodicos', component: EjerciciosMelodicosComponent },
+    { path: 'ejercicio/:tipo/:nivel', component: EjercicioComponent} ,
     {path: '**', component: NotfoundComponent}
 
 ];

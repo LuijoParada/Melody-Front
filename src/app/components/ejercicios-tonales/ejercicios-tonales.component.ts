@@ -12,6 +12,7 @@ export class EjerciciosTonalesComponent {
   constructor(private router: Router) {}
 
   goToExercise(nivel: number): void {
-    this.router.navigate(['/ejercicio', nivel]);
+    this.router.navigate(['/ejercicio', 'tonal', nivel]);
   }
 }
+

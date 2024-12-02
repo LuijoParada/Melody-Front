@@ -8,7 +8,7 @@
       <p style="text-align: center; font-size: 28px;" *ngIf="pregunta">
         {{ pregunta }}
       </p>
-      <p style="text-align: center; font-size: 18px;">Haz clic en una imagen para seleccionar una opción</p>
+      <p style="text-align: center; font-size: 18px;">Haz clic en una opción para seleccionar la respuesta correcta</p>
       <div class="opciones" style="text-align: center;">
         <div *ngFor="let opcion of opciones" class="opcion" (click)="seleccionarOpcion(opcion)" [ngClass]="{ 'opcion-correcta': opcion.imagen === respuestaCorrecta && mostrarBoton, 'opcion-incorrecta': opcion.imagen !== respuestaCorrecta && mostrarBoton }">
           <img [src]="opcion.imagen" alt="Opción" [style.pointer-events]="mostrarBoton ? 'none' : 'auto'" style="width: 100%; max-width: 600px; margin: 10px 0;">
@@ -18,8 +18,8 @@
         {{ mensajeAlerta }}
       </p>
       <button *ngIf="mostrarBoton" style="margin-top: 20px; background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;" (click)="avanzarPregunta()">Avanzar</button>
+      <button *ngIf="mostrarBotonFinal" style="margin-top: 20px; background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;" (click)="redirigirSeleccionNiveles()">Volver a Selección de Niveles</button>
     </div>
   </div>
 </section>
-
 

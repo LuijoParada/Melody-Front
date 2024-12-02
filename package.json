@@ -20,6 +20,7 @@
     "@angular/router": "^18.1.0",
     "axios": "^1.7.7",
     "flowbite": "^2.5.2",
+    "melody-front": "file:",
     "ng2-pdf-viewer": "^10.3.4",
     "primeng": "^17.18.12",
     "rxjs": "~7.8.0",
