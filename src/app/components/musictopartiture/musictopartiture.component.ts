@@ -53,10 +53,10 @@ export class MusictopartitureComponent implements AfterViewInit {
       this.modal.hide();
     }
 
+
     onDragOver(event: DragEvent) {
       event.preventDefault();
     }
-
     onFileDrop(event: DragEvent) {
       event.preventDefault();
       if (event.dataTransfer?.files.length) {
@@ -133,6 +133,13 @@ export class MusictopartitureComponent implements AfterViewInit {
       this.isLoading = false;
     }
   }
+  //funcion para guardar el audio y la partitura en favoritos del usuario
+    saveToFavorites() {
+      console.log('Guardando en favoritos');
+      axios.post('http://localhost:8000/api/audio/favorite', {
+        pdfurl: this.pdfUrl,
 
+      })
+    }
 
 }
