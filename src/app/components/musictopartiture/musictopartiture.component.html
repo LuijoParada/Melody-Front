@@ -79,6 +79,7 @@
             <!-- Botón para guardar -->
             <div class="flex items-center justify-center mb-2 space-x-4">
               <audio *ngIf="audiofileURL" [src]="audiofileURL" controls class="flex-grow w-80 lg:w-96 h-12 bg-gray-200 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring focus:ring-blue-400"></audio>
+              <!-- Botón para guardar -->
               <button class="inline-flex items-center justify-center h-12 px-6 bg-gray-100 border border-gray-300 text-gray-800 hover:bg-gray-200 rounded-lg text-base font-medium focus:outline-none focus:ring focus:ring-blue-400">Guardar</button>
             </div>
             <embed [src]="pdfUrl" class="w-full h-[500px] min-w-[450px] rounded-xl" type="application/pdf" />
