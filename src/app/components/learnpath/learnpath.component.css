@@ -1,0 +1,30 @@
+.sticky-details summary {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 10px;
+  color: white;
+  border-radius: 4px;
+  font-size: 1.25rem; /* Agrandar el texto del resumen */
+}
+
+.image-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.title-lg {
+  font-size: 1.25rem; /* Agrandar el texto de los títulos principales dentro del dropdown */
+  font-weight: bold; /* Asegurar que el texto sea negrita */
+}
+
+.subtitle-lg {
+  font-size: 1.125rem; /* Ajustar el tamaño de los subtítulos */
+  font-weight: bold; /* Asegurar que el texto sea negrita */
+}
