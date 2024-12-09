@@ -10,11 +10,18 @@
       </p>
       <p style="text-align: center; font-size: 18px;">Haz clic en una opción para seleccionar la respuesta correcta</p>
       <div class="opciones" style="text-align: center;">
-        <div *ngFor="let opcion of opciones" class="opcion" (click)="seleccionarOpcion(opcion)" [ngClass]="{ 'opcion-correcta': opcion.imagen === respuestaCorrecta && mostrarBoton, 'opcion-incorrecta': opcion.imagen !== respuestaCorrecta && mostrarBoton }">
-          <img [src]="opcion.imagen" alt="Opción" [style.pointer-events]="mostrarBoton ? 'none' : 'auto'" style="width: 100%; max-width: 600px; margin: 10px 0;">
+        <div *ngFor="let opcion of opciones" class="opcion"
+             (click)="seleccionarOpcion(opcion)"
+             [ngClass]="{ 'opcion-correcta': opcion.imagen === respuestaCorrecta && mostrarBoton, 'opcion-incorrecta': opcion.imagen !== respuestaCorrecta && mostrarBoton }"
+             style="display: inline-block; width: 50%; max-width: 1000px; overflow: hidden; position: relative; margin-bottom: -50px; margin-left: 110px;">
+
+          <img [src]="opcion.imagen" alt="Opción"
+               [style.pointer-events]="mostrarBoton ? 'none' : 'auto'"
+               style="width: 200%; height: 200%; max-width: none; margin: auto; object-fit: cover; object-position: center; clip-path: inset(20% 60% 20% 0); display: block;">
         </div>
       </div>
-      <p *ngIf="mensajeAlerta" [ngClass]="mensajeAlerta === '¡Correcto!' ? 'mensaje-correcto' : 'mensaje-incorrecto'">
+
+      <p *ngIf="mensajeAlerta" [ngClass]="mensajeAlerta === '¡Correcto!' ? 'mensaje-correcto' : 'mensaje-incorrecto'" style="margin-top: 30px;">
         {{ mensajeAlerta }}
       </p>
       <button *ngIf="mostrarBoton" style="margin-top: 20px; background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;" (click)="avanzarPregunta()">Avanzar</button>
@@ -22,4 +29,3 @@
     </div>
   </div>
 </section>
-
