@@ -4,12 +4,12 @@
       <h1 style="text-align: left;">Nivel {{ nivel }}</h1>
       <span style="text-align: right;">{{ ejercicioActual }}/{{ totalEjercicios }}</span>
     </div>
-    <div class="ejercicio bg-gray-100 p-4 rounded-lg">
+    <div class="ejercicio bg-gray-100 p-2 rounded-lg">
       <p style="text-align: center; font-size: 28px;" *ngIf="pregunta">
         {{ pregunta }}
       </p>
       <p style="text-align: center; font-size: 18px;">Haz clic en una opción para seleccionar la respuesta correcta</p>
-      <div class="opciones" style="text-align: center;">
+      <div class="opciones" style="text-align: center; margin-bottom: 20px;">
         <div *ngFor="let opcion of opciones" class="opcion"
              (click)="seleccionarOpcion(opcion)"
              [ngClass]="{ 'opcion-correcta': opcion.imagen === respuestaCorrecta && mostrarBoton, 'opcion-incorrecta': opcion.imagen !== respuestaCorrecta && mostrarBoton }"
