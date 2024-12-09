@@ -9,6 +9,7 @@ import { Modal } from 'flowbite';
 import type { ModalOptions, ModalInterface } from 'flowbite';
 import { AuthService } from '../../services/auth.service';
 
+import { SharedStateService } from '../../services/shared-state.service';
 @Component({
   selector: 'app-musictopartiture',
   standalone: true,
@@ -36,7 +37,7 @@ export class MusictopartitureComponent implements AfterViewInit {
   favs = false;
   userId: string | null = null;
 
-  constructor(private musictopartitureAuxService: MusictopartitureAuxService, private sanitizer: DomSanitizer, private auth: AuthService) {
+  constructor(private musictopartitureAuxService: MusictopartitureAuxService, private sanitizer: DomSanitizer, private auth: AuthService, private sharedState: SharedStateService) {
     this.userId = auth.getUser()?.id;
   }
 
@@ -134,9 +135,11 @@ export class MusictopartitureComponent implements AfterViewInit {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
-        //console.log('Respuesta del servidor:', response.data);
+        console.log('Respuesta del servidor:', response.data);
         const pdfPath = response.data.pdfurl;
+        console.log('URL del archivo:', pdfPath);
         this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(pdfPath);
+        console.log('URL del archivo:', this.pdfUrl);
         this.audioname = response.data.audioname;
         //console.log('URL del archivo:', pdfPath);
     } catch (error) {
@@ -176,12 +179,15 @@ export class MusictopartitureComponent implements AfterViewInit {
           audio_name: this.audioname, // Nombre del archivo de audio
           pdf_name: pdfName, // Nombre del archivo PDF extraído
           id_usuario: this.userId, // ID del usuario (asegúrate de obtenerlo en tu componente)
+          
         },
         {
           withCredentials: true, // Incluir credenciales si es necesario
         }
       );
-  
+
+      //this.sharedState.incrementUserCount(); // Incrementar el contador global
+
       console.log('Guardado en favoritos con éxito:', response.data);
       alert('Guardado en favoritos con éxito'); // Alerta emergente estándar
     } catch (error) {

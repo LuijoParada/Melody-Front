@@ -13,4 +13,7 @@ export class FavoritesService {
   getFavorites(userId: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/favorites/${userId}`);
   }
+
+
+
 }

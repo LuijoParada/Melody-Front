@@ -11,7 +11,9 @@ import { EjerciciosTonalesComponent } from './components/ejercicios-tonales/ejer
 import { EjerciciosRitmicosComponent } from './components/ejercicios-ritmicos/ejercicios-ritmicos.component';
 import { EjerciciosMelodicosComponent } from './components/ejercicios-melodicos/ejercicios-melodicos.component';
 import { EjercicioComponent } from './components/ejercicio/ejercicio.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { authGuard } from './guard/auth.guard';
+import { adminGuard } from './guard/admin.guard';
 
 
 export const routes: Routes = [
@@ -23,10 +25,10 @@ export const routes: Routes = [
     {path: 'register', component: RegisterComponent},
     //esta ruta estara protegida por el guard
     {path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
+    {path: 'admin', component: AdminComponent, canActivate: [adminGuard]},
     {path: 'tonales', component: EjerciciosTonalesComponent},
-    { path: 'ritmicos', component: EjerciciosRitmicosComponent },
-    { path: 'melodicos', component: EjerciciosMelodicosComponent },
-    { path: 'ejercicio/:tipo/:nivel', component: EjercicioComponent} ,
+    {path: 'ritmicos', component: EjerciciosRitmicosComponent },
+    {path: 'melodicos', component: EjerciciosMelodicosComponent },
+    {path: 'ejercicio/:tipo/:nivel', component: EjercicioComponent} ,
     {path: '**', component: NotfoundComponent}
-
 ];
