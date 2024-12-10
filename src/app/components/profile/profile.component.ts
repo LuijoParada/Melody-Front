@@ -17,9 +17,9 @@ export class ProfileComponent {
   favorites: any[] = [];
   userId: number = NaN ; // Aquí puedes setear el ID estático o dinámicamente
   userName: string | null = null; // Esto puede venir de un servicio
-  userEmail: string | null = null;
-  public userCount: any | null = null;
-  modal: boolean = false;
+  userEmail: string | null = null; 
+  public userCount: any | null = null; 
+  modal: boolean = false; 
 
   constructor(private favoritesService: FavoritesService, private auth: AuthService, private sanitizer: DomSanitizer, private sharedState: SharedStateService) {
     this.userName = this.auth.getUser().name;
@@ -27,10 +27,9 @@ export class ProfileComponent {
     this.userCount = this.sharedState.setUserCount(this.auth.getUser().numberOfFavorites);
   }
 
-
   ngOnInit(): void {
     this.loadFavorites();
-  }
+  } 
 
   loadFavorites(): void {
     this.userId = this.auth.getUser().id;
