@@ -20,7 +20,24 @@ export class RegisterComponent {
    }
    
    onSubmit() {
-    const register = async (name: string, email: string, password: string) => {
+    const register = async (name: string, email: string, password: string, passwordConfirmation: string ) => {
+
+      // Validar que los campos no estén vacíos y si lo están, mostrar un mensaje de error
+      if (name == "" || email == "" || password == "" || passwordConfirmation == "") {
+        alert('Campos vacíos');
+        return;
+      }
+      // Validar que las contraseñas coincidan
+      if (password != passwordConfirmation) {
+        alert('Las contraseñas no coinciden');
+        return;
+      }
+      //verificar que el correo sea valido
+      if (!email.includes('@') || !email.includes('.')) {
+        alert('Correo no valido');
+        return;
+      }
+      
       try {
         //Obtener el token CSRF de la cookie si no existe
         if (!this.getCookie('XSRF-TOKEN')) {
@@ -39,14 +56,16 @@ export class RegisterComponent {
           name: name,
           email: email,
           password: password,
+          password_confirmation: passwordConfirmation
         }, {
           withCredentials: true,
              
         }).then(response => { 
-          if (response.data.message == "User Created Successfully") {
-            this.router.navigate(['/login']); // Redirigir al usuario a la página de perfil
-          }
+          
+          this.router.navigate(['/login']); // Redirigir al usuario a la página de perfil
+          
           console.log('Registro exitoso:', response);
+          
         })
 
       } catch (error) {
@@ -54,7 +73,7 @@ export class RegisterComponent {
       }
     };
     // Llama a la función de registro con los datos de usuario
-    register(this.name, this.email, this.password);
+    register(this.name, this.email, this.password, this.passwordConfirmation);
   }
   getCookie(name: string): string | null {
     const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));

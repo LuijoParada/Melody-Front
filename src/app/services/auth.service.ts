@@ -21,6 +21,10 @@
     getUser(): any {
       return this.user;
     }
+    // Devuelve el rol del usuario loggeado si es que hay
+    getUserRole(): string {
+      return this.user?.role || '';
+    }
 
     /**
      * Inicia sesión con credenciales
@@ -37,7 +41,15 @@
               'Content-Type': 'application/json',
             },
           }
-        );
+        ).then(response => {
+        //si la respuesta es User is inactive, mostramos un mensaje un alert que explique que el usuario esta inactivo
+
+        if (response.data.message === 'User is inactive') {
+          alert('Usuario inactivo');
+          console.log('Usuario inactivo');
+          return response;
+        }
+        
         // Actualiza el estado de autenticación
         this.isAuthenticated = true;
         this.user = response.data.user; // Guarda la información del usuario
@@ -45,7 +57,15 @@
         this.saveAuthState();
 
         console.log('Login exitoso:', this.user);
+        if (this.user.role === 'admin' || this.user.role === 'master') {
+          this.router.navigate(['/admin']);
+        } else {
         this.router.navigate(['/profile']);
+        }
+        return response;
+        });
+
+        
       } catch (error) {
         if (axios.isAxiosError(error)) {
           console.error('Error en el login:', error.response?.data || error.message);
