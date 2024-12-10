@@ -6,13 +6,13 @@
 
     <!--a partir de aqui se  aplican los estilos importantes para el responsive creo...-->
     <div class="flex flex-wrap justify-center w-full mx-auto">
-    
+
       <div [ngClass]=" isSent ? 'xl:w-1/3' : 'xl:w-3/4'" class="w-full lg:w-1/2 p-2 min-w-[536px]">
 
         <form (ngSubmit)="onSubmit($event)">
           <div class="bg-slate-300  p-4 rounded-lg">
 
- 
+
 
             <div class="container mx-auto flex flex-col px-5 py-2 justify-center items-center">
               <div class="flex items-center justify-center w-full mb-4">
@@ -35,30 +35,30 @@
                     </div>
                   </div>
                 </div>
- 
+
                 <label for="dropzone-file" [ngClass]="isActive ? 'active' : 'hidden'" class="file-container flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  dark:bg-[#0f172a] hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-[#1d2b4d]"
                   (dragover)="onDragOver($event)" dark:hover:bg-gray-800
                   (drop)="onFileDrop($event)">
-                  
+
                   <div class="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                     </svg>
                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center"><span class="font-semibold">Click para subir el archivo</span> <br>o arrastre su archivo hasta aqui</p>
-                    <p class="text-xs text-center text-gray-500 dark:text-gray-400">MP3, WAV or OGG <br>(Maximo 30s)</p>
+                    <p class="text-xs text-center text-gray-500 dark:text-gray-400">MP3, WAV<br>(Maximo 30s)</p>
                   </div>
-              
+
                   <input #fileInput id="dropzone-file" type="file" class="hidden" (change)="onFileChange($event)" accept=".mp3, .wav" />
-                </label> 
-              </div>                
+                </label>
+              </div>
 
               <input class="hidden w-full mt-2 mb-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" name="dropzone-file" id="file_input" type="file" (change)="onFileChange($event)" accept=".mp3, .wav">
               <div [ngClass]="isActive ? 'hidden' : 'active'" class="flex w-full justify-center items-center">
-                <button class="inline-flex text-white bg-blue-900 border-0 py-2 px-6 focus:outline-none mb-2 hover:bg-blue-600 active:bg-blue-700 active:scale-95 rounded text-lg disabled:bg-slate-500"  [disabled]="disableButton" (click)="disableButtonFunction()" type="submit">Convertir</button> 
+                <button class="inline-flex text-white bg-blue-900 border-0 py-2 px-6 focus:outline-none mb-2 hover:bg-blue-600 active:bg-blue-700 active:scale-95 rounded text-lg disabled:bg-slate-500"  [disabled]="disableButton" (click)="disableButtonFunction()" type="submit">Convertir</button>
               </div>
-            
+
               <div #alertBottom></div>
-            </div> 
+            </div>
           </div>
         </form>
       </div>
@@ -71,7 +71,7 @@
               <svg viewBox="0 0 135 135" xmlns="http://www.w3.org/2000/svg" fill="#444E76FF"><path d="M67.447 58c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm9.448 9.447c0 5.523 4.477 10 10 10 5.522 0 10-4.477 10-10s-4.478-10-10-10c-5.523 0-10 4.477-10 10zm-9.448 9.448c-5.523 0-10 4.477-10 10 0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zM58 67.447c0-5.523-4.477-10-10-10s-10 4.477-10 10 4.477 10 10 10 10-4.477 10-10z"><animateTransform attributeName="transform" type="rotate" from="0 67 67" to="-360 67 67" dur="2.5s" repeatCount="indefinite"/></path><path d="M28.19 40.31c6.627 0 12-5.374 12-12 0-6.628-5.373-12-12-12-6.628 0-12 5.372-12 12 0 6.626 5.372 12 12 12zm30.72-19.825c4.686 4.687 12.284 4.687 16.97 0 4.686-4.686 4.686-12.284 0-16.97-4.686-4.687-12.284-4.687-16.97 0-4.687 4.686-4.687 12.284 0 16.97zm35.74 7.705c0 6.627 5.37 12 12 12 6.626 0 12-5.373 12-12 0-6.628-5.374-12-12-12-6.63 0-12 5.372-12 12zm19.822 30.72c-4.686 4.686-4.686 12.284 0 16.97 4.687 4.686 12.285 4.686 16.97 0 4.687-4.686 4.687-12.284 0-16.97-4.685-4.687-12.283-4.687-16.97 0zm-7.704 35.74c-6.627 0-12 5.37-12 12 0 6.626 5.373 12 12 12s12-5.374 12-12c0-6.63-5.373-12-12-12zm-30.72 19.822c-4.686-4.686-12.284-4.686-16.97 0-4.686 4.687-4.686 12.285 0 16.97 4.686 4.687 12.284 4.687 16.97 0 4.687-4.685 4.687-12.283 0-16.97zm-35.74-7.704c0-6.627-5.372-12-12-12-6.626 0-12 5.373-12 12s5.374 12 12 12c6.628 0 12-5.373 12-12zm-19.823-30.72c4.687-4.686 4.687-12.284 0-16.97-4.686-4.686-12.284-4.686-16.97 0-4.687 4.686-4.687 12.284 0 16.97 4.686 4.687 12.284 4.687 16.97 0z"><animateTransform attributeName="transform" type="rotate" from="0 67 67" to="360 67 67" dur="8s" repeatCount="indefinite"/></path></svg>
               <h3 class="text-gray-900 text-center title-font text-lg font-medium">Convirtiendo...</h3>
             </div>
-          
+
             <span class="sr-only">Loading</span>
           </div>
           <!--el embed debe adaptarse al tamaño del contenedor *ngIf="pdfUrl" "pdfUrl"-->
@@ -80,13 +80,13 @@
             <div class="flex items-center justify-center mb-2 space-x-4">
               <audio *ngIf="audiofileURL" [src]="audiofileURL" controls class="flex-grow w-80 lg:w-96 h-12 bg-gray-200 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring focus:ring-blue-400"></audio>
               <!-- Botón para guardar al ser presionado se desactiva, genera los estilos para disable -->
-              <button 
-              (click)="handleClick()" 
-              [disabled]="favs" 
-              class="inline-flex items-center justify-center h-12 px-6 
-                bg-gray-100 border border-gray-300 text-gray-800 
-                hover:bg-gray-200 rounded-lg text-base font-medium 
-                focus:outline-none focus:ring focus:ring-blue-400 
+              <button
+              (click)="handleClick()"
+              [disabled]="favs"
+              class="inline-flex items-center justify-center h-12 px-6
+                bg-gray-100 border border-gray-300 text-gray-800
+                hover:bg-gray-200 rounded-lg text-base font-medium
+                focus:outline-none focus:ring focus:ring-blue-400
                 disabled:bg-gray-200 disabled:border-gray-300 disabled:text-gray-500"
             >
               <span *ngIf="filesSaved" class="spinner-border animate-spin mr-2"></span> <!-- Indicador de carga -->
@@ -121,7 +121,7 @@
                 </svg>
                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">No ha cargado ningun archivo</h3>
                 <button data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                    Volver a intentar 
+                    Volver a intentar
                 </button>
 
             </div>
