@@ -14,4 +14,7 @@ export class EjerciciosMelodicosComponent {
   goToExercise(nivel: number): void {
     this.router.navigate(['/ejercicio', 'melodico', nivel]);
   }
+  goToExercise2(nivel: number): void {
+    this.router.navigate(['/ejercicio', 'tonal', nivel]);
+  }
 }
