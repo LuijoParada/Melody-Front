@@ -1,18 +1,35 @@
-<section class="text-gray-600 body-font bg-slate-200">
+<section class="text-gray-800 body-font bg-slate-400">
   <div class="container px-5 py-12 mx-auto">
-    <h1 class="text-2xl font-bold title-font mb-4 text-center text-gray-900">Ejercicios Melódicos y armonicos</h1>
-    <p class="text-base leading-relaxed mb-12 text-center text-gray-600">
-      Ejercicios para desarrollar tu oído melódico y armonico.
-    </p>
-    <ul class="list-none p-0 text-left w-full md:w-3/5 lg:w-3/5 mx-auto">
-      <li class="mb-4 p-4 bg-gray-100 rounded-lg cursor-pointer flex justify-between items-center hover:bg-gray-200" (click)="goToExercise2(4)">
-        Nivel 1: Identificacion de Acordes
+    <div class="bg-blue-800 bg-opacity-90 p-6 rounded-lg mb-4 text-white w-full md:w-4/5 lg:w-4/5 mx-auto">
+      <h1 class="text-3xl font-bold title-font mb-4 text-center">Ejercicios Melódicos y Armónicos</h1>
+      <p class="text-lg leading-relaxed text-center">
+        Ejercicios para desarrollar tu oído melódico y armónico. Cada nivel contiene una serie de ejercicios de selección múltiple diseñados para ayudarte a mejorar tu reconocimiento de acordes y progresiones, así como tu capacidad para interpretar melodías.
+      </p>
+    </div>
+    <div class="bg-slate-600 bg-opacity-75 p-6 rounded-lg mb-6 w-full md:w-4/5 lg:w-4/5 mx-auto">
+      <h2 class="text-xl font-bold mb-4 text-white">¿Qué esperar de cada nivel?</h2>
+      <p class="text-base text-white">
+        Por cada nivel, encontrarás una cantidad de ejercicios que te desafiarán a identificar acordes, progresiones de acordes y melodías. Estos ejercicios son ideales para estudiantes de nivel intermedio que buscan desarrollar su oído musical y su capacidad de interpretación.
+      </p>
+    </div>
+    <ul class="list-none p-0 text-left w-full md:w-4/5 lg:w-4/5 mx-auto">
+      <li class="mb-6 p-4 bg-gray-100 rounded-lg cursor-pointer flex justify-between items-center hover:bg-gray-200" (click)="goToExercise2(4)">
+        Nivel 1: Identificación de Acordes
+        <svg class="w-4 h-4 ml-2 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18l6-6-6-6"></path>
+        </svg>
       </li>
-      <li class="mb-4 p-4 bg-gray-100 rounded-lg cursor-pointer flex justify-between items-center hover:bg-gray-200" (click)="goToExercise(1)">
-        Nivel 2: Identificacion de Progresiones de acordes
+      <li class="mb-6 p-4 bg-gray-100 rounded-lg cursor-pointer flex justify-between items-center hover:bg-gray-200" (click)="goToExercise(1)">
+        Nivel 2: Identificación de Progresiones de Acordes
+        <svg class="w-4 h-4 ml-2 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18l6-6-6-6"></path>
+        </svg>
       </li>
-      <li class="mb-4 p-4 bg-gray-100 rounded-lg cursor-pointer flex justify-between items-center hover:bg-gray-200" (click)="goToExercise(2)">
-        Nivel 3: Melodias (ritmo y notas)
+      <li class="mb-6 p-4 bg-gray-100 rounded-lg cursor-pointer flex justify-between items-center hover:bg-gray-200" (click)="goToExercise(2)">
+        Nivel 3: Melodías (Ritmo y Notas)
+        <svg class="w-4 h-4 ml-2 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18l6-6-6-6"></path>
+        </svg>
       </li>
     </ul>
   </div>

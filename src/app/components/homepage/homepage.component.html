@@ -1,85 +1,113 @@
 <section class="text-gray-600 body-font bg-slate-400">
-    <div class="container px-5 py-12 mx-auto">
-      <!-- Sección de texto y tarjetas -->
-      <div class="flex flex-col lg:flex-row items-center rounded-lg mb-12 bg-[#0f172a] text-white p-6">
-
-        <div class="lg:w-1/2 w-full">
-          <h2 class="text-4xl font-bold mb-6 ">Accede a todo Nuestro Contenido</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <!-- Tarjeta 1 -->
-            <div class="bg-blue-800 rounded-lg p-4 shadow-md">
-              <h3 class="text-xl font-semibold mb-2">Teoria Musical</h3>
-              <p class="text-gray-300">
-                Aprende los conceptos mas importantes sobre teoria musical necesarios para la lectura.
-              </p>
-            </div>
-            <!-- Tarjeta 2 -->
-            <div class="bg-blue-800 rounded-lg p-4 shadow-md">
-              <h3 class="text-xl font-semibold mb-2">Ejercicios</h3>
-              <p class="text-gray-300">
-                Encuentra una variedad de ejercicios para practicar tus habilidades musicales.
-              </p>
-            </div>
-            <!-- Tarjeta 3 -->
-            <div class="bg-blue-800 rounded-lg p-4 shadow-md sm:col-span-2">
-              <h3 class="text-xl font-semibold mb-2">Recursos</h3>
-              <p class="text-gray-300">
-                Accede nuestros ejercicios y herramientas de transcripcion para mejorar tu aprendizaje musical.
-              </p>
-            </div>
+  <div class="container px-5 py-12 mx-auto">
+    <!-- Sección de texto y tarjetas -->
+    <div class="flex flex-col lg:flex-row items-center rounded-lg mb-12 bg-[#0f172a] text-white p-6">
+      <div class="lg:w-1/2 w-full">
+        <h2 class="text-4xl font-bold mb-6">Accede a todo Nuestro Contenido</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Tarjeta 1 -->
+          <div class="bg-blue-800 rounded-lg p-4 shadow-md">
+            <h3 class="text-xl font-semibold mb-2">Teoria Musical</h3>
+            <p class="text-gray-300">
+              Aprende los conceptos más importantes sobre teoría musical necesarios para la lectura.
+            </p>
+          </div>
+          <!-- Tarjeta 2 -->
+          <div class="bg-blue-800 rounded-lg p-4 shadow-md">
+            <h3 class="text-xl font-semibold mb-2">Ejercicios</h3>
+            <p class="text-gray-300">
+              Encuentra una variedad de ejercicios para practicar tus habilidades musicales.
+            </p>
+          </div>
+          <!-- Tarjeta 3 -->
+          <div class="bg-blue-800 rounded-lg p-4 shadow-md sm:col-span-2">
+            <h3 class="text-xl font-semibold mb-2">Recursos</h3>
+            <p class="text-gray-300">
+              Accede nuestros ejercicios y herramientas de transcripción para mejorar tu aprendizaje musical.
+            </p>
           </div>
         </div>
+      </div>
 
-        <!-- Sección de la imagen -->
-        <!-- Carrusel -->
-        <div class="lg:w-1/2 w-full flex justify-center mt-8 lg:mt-0 overflow-hidden relative">
-          <div class="carousel-wrapper" [style.transform]="getTransform()" [style.transition]="transition">
-            <div class="carousel-item" *ngFor="let image of images">
-              <img [src]="image" alt="Imagen del carrusel" class="carousel-image rounded-lg shadow-lg" />
-            </div>
+      <!-- Sección de la imagen -->
+      <!-- Carrusel -->
+      <div class="lg:w-1/2 w-full flex justify-center mt-8 lg:mt-0 overflow-hidden relative">
+        <div class="carousel-wrapper" [style.transform]="getTransform()" [style.transition]="transition">
+          <div class="carousel-item" *ngFor="let image of images">
+            <img [src]="image" alt="Imagen del carrusel" class="carousel-image rounded-lg shadow-lg" />
           </div>
         </div>
+      </div>
+    </div>
 
-      </div>
-      <!--enlaces-->
-      <div class="flex flex-wrap  mb-12">
-        <div class="p-4 lg:w-1/3">
-          <a href="" class="block h-full bg-white bg-opacity-100 px-8 py-16 rounded-lg overflow-hidden text-center relative">
-            <h1 class="title-font sm:text-2xl text-xl font-bold text-gray-900 mb-6">Aprender Teoría</h1>
-            <p class="leading-relaxed mb-6">Explora conceptos básicos y avanzados de la teoría musical para mejorar tu conocimiento.</p>
-            <span class="text-blue-600 inline-flex items-center font-medium">Ver Teoría
-              <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="M12 5l7 7-7 7"></path>
-              </svg>
-            </span>
-          </a>
+    <!-- Nueva Sección: ¿Por dónde debería empezar? -->
+    <div class="flex flex-col lg:flex-row items-center rounded-lg mb-12 bg-[#1e293b] text-white p-6">
+      <h2 class="text-4xl font-bold mb-6 w-full text-center">¿Por dónde debería empezar?</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <!-- Tarjeta 1 -->
+        <div class="bg-blue-800 rounded-lg p-4 shadow-md">
+          <h3 class="text-xl font-semibold mb-2">¿Sabes algo de teoría musical?</h3>
+          <p class="text-gray-300">
+            Si ya tienes conocimientos básicos de teoría musical, revisa la teoría básica del pentagrama. Luego, pasa a practicar con los ejercicios tonales y rítmicos para reforzar tu comprensión.
+          </p>
         </div>
-        <div class="p-4 lg:w-1/3">
-          <a href="" class="block h-full bg-white bg-opacity-100 px-8 py-16 rounded-lg overflow-hidden text-center relative">
-            <h1 class="title-font sm:text-2xl text-xl font-bold text-gray-900 mb-6">Ejercicio Tonal</h1>
-            <p class="leading-relaxed mb-6">Practica ejercicios tonales para mejorar tu reconocimiento de notas.</p>
-            <span class="text-blue-600 inline-flex items-center font-medium">Ver Ejercicio
-              <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="M12 5l7 7-7 7"></path>
-              </svg>
-            </span>
-          </a>
+        <!-- Tarjeta 2 -->
+        <div class="bg-blue-800 rounded-lg p-4 shadow-md">
+          <h3 class="text-xl font-semibold mb-2">¿Eres totalmente nuevo en música?</h3>
+          <p class="text-gray-300">
+            Si no tienes ningún conocimiento previo, comienza por leer toda nuestra sección de teoría. Esto te dará una base sólida para entender los conceptos musicales básicos.
+          </p>
         </div>
-        <div class="p-4 lg:w-1/3">
-          <a href="" class="block h-full bg-white bg-opacity-100 px-8 py-16 rounded-lg overflow-hidden text-center relative">
-            <h1 class="title-font sm:text-2xl text-xl font-bold text-gray-900 mb-6">Ejercicio Rítmico</h1>
-            <p class="leading-relaxed mb-6">Mejora tu sentido del ritmo con ejercicios rítmicos prácticos.</p>
-            <span class="text-blue-600 inline-flex items-center font-medium">Ver Ejercicio
-              <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="M12 5l7 7-7 7"></path>
-              </svg>
-            </span>
-          </a>
+        <!-- Tarjeta 3 -->
+        <div class="bg-blue-800 rounded-lg p-4 shadow-md">
+          <h3 class="text-xl font-semibold mb-2">¿Ya sabes algo de lectura musical?</h3>
+          <p class="text-gray-300">
+            Si ya tienes algo de práctica en lectura musical, enfócate en ejercicios armónicos y melódicos para mejorar tu capacidad de interpretación y lectura de partituras complejas.
+          </p>
         </div>
       </div>
+    </div>
+
+    <!-- Enlaces a más contenido -->
+    <div class="flex flex-wrap mb-12">
+      <div class="p-4 lg:w-1/3">
+        <a href="" class="block h-full bg-white bg-opacity-100 px-8 py-16 rounded-lg overflow-hidden text-center relative">
+          <h1 class="title-font sm:text-2xl text-xl font-bold text-gray-900 mb-6">Aprender Teoría</h1>
+          <p class="leading-relaxed mb-6">Explora conceptos básicos y avanzados de la teoría musical para mejorar tu conocimiento.</p>
+          <span class="text-blue-600 inline-flex items-center font-medium">Ver Teoría
+            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"></path>
+              <path d="M12 5l7 7-7 7"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+      <div class="p-4 lg:w-1/3">
+        <a href="" class="block h-full bg-white bg-opacity-100 px-8 py-16 rounded-lg overflow-hidden text-center relative">
+          <h1 class="title-font sm:text-2xl text-xl font-bold text-gray-900 mb-6">Ejercicio Tonal</h1>
+          <p class="leading-relaxed mb-6">Practica ejercicios tonales para mejorar tu reconocimiento de notas.</p>
+          <span class="text-blue-600 inline-flex items-center font-medium">Ver Ejercicio
+            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"></path>
+              <path d="M12 5l7 7-7 7"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+      <div class="p-4 lg:w-1/3">
+        <a href="" class="block h-full bg-white bg-opacity-100 px-8 py-16 rounded-lg overflow-hidden text-center relative">
+          <h1 class="title-font sm:text-2xl text-xl font-bold text-gray-900 mb-6">Ejercicio Rítmico</h1>
+          <p class="leading-relaxed mb-6">Mejora tu sentido del ritmo con ejercicios rítmicos prácticos.</p>
+          <span class="text-blue-600 inline-flex items-center font-medium">Ver Ejercicio
+            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"></path>
+              <path d="M12 5l7 7-7 7"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
       <!--como funciona nuestra ia-->
             <!-- Sección de texto e imagen -->
             <div class="flex flex-col lg:flex-row items-center rounded-lg mb-4 bg-[#0f172a] text-white p-8">
@@ -93,7 +121,7 @@
                     </div>
                   </div>
                 </div>
-                  
+
               </div>
 
               <!-- Texto e íconos -->
