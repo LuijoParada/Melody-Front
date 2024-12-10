@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser'; // Importa DomSanitizer
 import { EjercicioService } from './ejercicio.service';
 
 @Component({
@@ -13,18 +14,20 @@ import { EjercicioService } from './ejercicio.service';
 export class EjercicioComponent implements OnInit {
   nivel: number = 0;
   ejercicios: any[] = [];
-  ejercicioActual: number = 0; // Indice del ejercicio actual en la lista
-  pregunta: string | null = null;
+  ejercicioActual: number = 0; // Índice del ejercicio actual en la lista
+  pregunta: SafeHtml | null = null; // Cambia a SafeHtml
   opciones: any[] = [];
   respuestaCorrecta: string | null = null;
   mostrarBoton: boolean = false;
   mensajeAlerta: string | null = null;
-  tipo: string = ''; // Tipo de ejercicio (tonal, ritmico, melodico)
+  tipo: string = ''; // Tipo de ejercicio
   totalEjercicios: number = 0; // Total de ejercicios para el nivel actual
   nivelRuta: string = ''; // Ruta para redirigir a la selección de niveles
   mostrarBotonFinal: boolean = false; // Propiedad para mostrar el botón final
+  opcionesDeshabilitadas: boolean = false; // Propiedad para deshabilitar opciones después de la respuesta correcta
+  intentosFallidos: number = 0; // Contador de intentos fallidos
 
-  constructor(private route: ActivatedRoute, private router: Router, private ejercicioService: EjercicioService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private ejercicioService: EjercicioService, private sanitizer: DomSanitizer) {} // Añade DomSanitizer
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -67,11 +70,14 @@ export class EjercicioComponent implements OnInit {
   mostrarEjercicio(index: number) {
     if (this.ejercicios[index]) {
       const ejercicio = this.ejercicios[index];
-      this.pregunta = ejercicio.pregunta;
+      this.pregunta = this.sanitizer.bypassSecurityTrustHtml(ejercicio.pregunta); // Usamos el sanitizer
       this.opciones = JSON.parse(ejercicio.opciones);
       this.respuestaCorrecta = ejercicio.respuesta_correcta;
       this.ejercicioActual = index + 1; // Ajustar a 1-indexed para mostrar al usuario
       this.mostrarBoton = false;
+      this.mostrarBotonFinal = false; // Asegurarse de que el botón de selección de niveles esté oculto
+      this.opcionesDeshabilitadas = false; // Habilitar las opciones para el nuevo ejercicio
+      this.intentosFallidos = 0; // Reiniciar el contador de intentos fallidos
       this.mensajeAlerta = null; // Limpiar mensaje de alerta
     } else {
       console.error('Ejercicio no encontrado:', index);
@@ -83,8 +89,14 @@ export class EjercicioComponent implements OnInit {
     if (opcion.imagen === this.respuestaCorrecta) {
       this.mensajeAlerta = '¡Correcto!';
       this.mostrarBoton = true;
+      this.opcionesDeshabilitadas = true; // Deshabilitar las opciones después de la respuesta correcta
     } else {
-      this.mensajeAlerta = 'Incorrecto, intenta de nuevo.';
+      this.intentosFallidos++;
+      if (this.intentosFallidos === 1) {
+        this.mensajeAlerta = 'Incorrecto, intenta de nuevo.';
+      } else {
+        this.mensajeAlerta = 'Incorrecto otra vez, ¡sigue intentando!';
+      }
     }
   }
 
